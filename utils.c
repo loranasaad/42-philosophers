@@ -6,11 +6,20 @@
 /*   By: loasaad <loasaad@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 14:57:05 by loasaad           #+#    #+#             */
-/*   Updated: 2025/12/08 15:05:14 by loasaad          ###   ########.fr       */
+/*   Updated: 2025/12/08 15:40:28 by loasaad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	*lone_philosopher(t_philo *philo)
+{
+	pthread_mutex_lock(&(philo->fork_left->fork_mtx));
+	print_status(philo, "has taken a fork");
+	ft_sleep(philo->table->time_to_die, philo);
+	pthread_mutex_unlock(&(philo->fork_left->fork_mtx));
+	return (NULL);
+}
 
 void	perror_exit(const char *message)
 {

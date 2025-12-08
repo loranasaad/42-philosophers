@@ -6,7 +6,7 @@
 /*   By: loasaad <loasaad@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 14:56:43 by loasaad           #+#    #+#             */
-/*   Updated: 2025/12/08 15:00:23 by loasaad          ###   ########.fr       */
+/*   Updated: 2025/12/08 16:07:52 by loasaad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	pick_up_forks(t_philo *philo)
 	}
 }
 
-static void	ft_sleep(long milliseconds, t_philo *philo)
+void	ft_sleep(long milliseconds, t_philo *philo)
 {
 	long	end;
 
@@ -64,13 +64,17 @@ static void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	if (philo->table->philo_count == 1)
+		return (lone_philosopher(philo));
 	while (!simulation_ended(philo))
 	{
 		pick_up_forks(philo);
 		print_status(philo, "is eating");
+		pthread_mutex_lock(&philo->table->mutex_sim);
 		philo->last_meal = get_time();
-		ft_sleep(philo->table->time_to_eat, philo);
 		philo->meals_eaten++;
+		pthread_mutex_unlock(&philo->table->mutex_sim);
+		ft_sleep(philo->table->time_to_eat, philo);
 		pthread_mutex_unlock(&(philo->fork_right->fork_mtx));
 		pthread_mutex_unlock(&(philo->fork_left->fork_mtx));
 		print_status(philo, "is sleeping");

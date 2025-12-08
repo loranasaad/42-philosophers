@@ -6,7 +6,7 @@
 /*   By: loasaad <loasaad@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 14:57:02 by loasaad           #+#    #+#             */
-/*   Updated: 2025/12/08 15:04:20 by loasaad          ###   ########.fr       */
+/*   Updated: 2025/12/08 15:42:12 by loasaad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,12 @@ void	perror_exit(const char *message);
 void	print_status(t_philo *philo, char *message);
 long	get_time(void);
 int		simulation_ended(t_philo *philo);
-
 void	parse_input(char **argv, t_table *table);
-
 void	dinner_time(t_table *t);
-
 void	init_data(t_table *table);
-
 void	*monitor_routine(void *arg);
-
 void	cleanup(t_table *t);
 void	cleanup_error(t_table *t);
-
+void	*lone_philosopher(t_philo *philo);
+void	ft_sleep(long milliseconds, t_philo *philo);
 #endif
