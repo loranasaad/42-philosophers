@@ -1,6 +1,5 @@
-*This project has been created as part of the 42 curriculum by loasaad.*
 
-# Philosophers — I never thought philosophy would be so deadly
+# Philosophers
 
 A simulation of the dining philosophers problem in C using threads and mutexes.
 
